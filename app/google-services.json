@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "933450423870",
+    "firebase_url": "https://bookstorageapp.firebaseio.com",
+    "project_id": "bookstorageapp",
+    "storage_bucket": "bookstorageapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933450423870:android:b01c61efa5e72c21",
+        "android_client_info": {
+          "package_name": "com.example.bookstorageapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933450423870-es84bs5dnjgdd74n4ttqj108lepojt05.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bookstorageapp",
+            "certificate_hash": "2e1f559ab2fd2f9e6961817a307b93bd6da8c01d"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBv9BwVtr3pxfMwZTMRBRK_umbqVz7b78o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933450423870-t54vdj3c40m2d2s5piga9ji0pd195jh8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
