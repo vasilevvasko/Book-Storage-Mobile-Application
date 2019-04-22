@@ -5,9 +5,9 @@ import com.google.firebase.database.Exclude;
 public class Book {
     private String title;
     private String author;
-    private String url;
     private String userLocation;
     private String ID;
+    private String postId;
 
     private String key;
 
@@ -22,11 +22,12 @@ public class Book {
         return author;
     }
 
-    public String getUrl() {return url;}
 
     public String getUserLocation() {return userLocation;}
 
     public String getID() {return ID;}
+
+    public String getPostId() {return postId;}
 
     @Exclude
     public String getKey(){ return key;}
@@ -39,11 +40,12 @@ public class Book {
         this.author = author;
     }
 
-    public void setUrl(String url) {this.url = url;}
 
     public void setUserLocation (String userLocation) {this.userLocation = userLocation;}
 
     public void setID (String ID) {this.ID = ID;}
+
+    public void setPostId(String postId) {this.postId = postId;}
 
     @Exclude
     public void setKey(String key) {this.key = key;}

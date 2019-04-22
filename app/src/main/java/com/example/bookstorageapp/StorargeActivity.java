@@ -1,8 +1,11 @@
 package com.example.bookstorageapp;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -17,16 +20,17 @@ import java.util.ArrayList;
 public class StorargeActivity extends AppCompatActivity {
 
     // View elements
-    ListView listView;
+    private ListView listView;
 
     // Database references
-    FirebaseDatabase database;
-    DatabaseReference ref;
+    private FirebaseDatabase database;
+    private DatabaseReference ref;
     // List view and adapter
-    ArrayList<String> list;
-    ArrayAdapter<String> adapter;
+    private ArrayList<String> list;
+    private ArrayList<String> idList;
+    private ArrayAdapter<String> adapter;
     // Global instance of object which will store fetched data from the database
-    Titles titles;
+    private Book books;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +39,13 @@ public class StorargeActivity extends AppCompatActivity {
 
 
         // Assign values to elements
-        titles = new Titles();
+        books = new Book();
         listView = (ListView) findViewById(R.id.listView);
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("Books"); // Might be Books
         list = new ArrayList<>();
+        idList = new ArrayList<>();
+
 
         // set adapter
         adapter = new ArrayAdapter<String>(this, R.layout.titles_info, R.id.titlesInfo, list); // not done
@@ -49,11 +55,26 @@ public class StorargeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds: dataSnapshot.getChildren()) {
-                titles = ds.getValue(Titles.class);
-                list.add(titles.getTitle());
+                    books = ds.getValue(Book.class);
+                    String book = books.getTitle() + " by " + books.getAuthor();
+                list.add(book);
+                idList.add(books.getPostId());
                 }
                 listView.setAdapter(adapter);
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                       String bookId = idList.get(position);
+                       ref.child(bookId);
+                        Intent intent = new Intent(StorargeActivity.this, SingleBookActivity.class);
+                        intent.putExtra("bookId", bookId);
+                        startActivity(intent);
+                    }
+                });
             }
+
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
